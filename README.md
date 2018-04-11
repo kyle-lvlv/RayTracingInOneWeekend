@@ -6,4 +6,4 @@
 
 3.out.txt是渲染结果，可以使用PMView 打开
 
-![avatar](I:/Material/CodeBlocks/RayTracing/Outputimage/out.bmp)
+![avatar](https://github.com/kyle-lvlv/RayTracingInOneWeekend/blob/master/Outputimage/out.bmp)
