@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1523434799 source:i:\material\codeblocks\raytracing\outputimage\main.cpp
+	<iostream>
+	<fstream>
+	<limits>
+	<stdlib.h>
+	"vec3.h"
+	"ray.h"
+	"hitable.h"
+	"camera.h"
+	"material.h"
+
+1523265341 i:\material\codeblocks\raytracing\outputimage\vec3.h
+	<math.h>
+	<stdlib.h>
+	<iostream>
+
+1523181784 i:\material\codeblocks\raytracing\outputimage\ray.h
+	"vec3.h"
+
+1523433931 i:\material\codeblocks\raytracing\outputimage\hitable.h
+	"ray.h"
+
+1523435067 i:\material\codeblocks\raytracing\outputimage\camera.h
+	"ray.h"
+
+1523427780 i:\material\codeblocks\raytracing\outputimage\material.h
+	"hitable.h"
+	"vec3.h"
+
+1523286874 source:f:\material\raytracing\raytracing\raytracing\outputimage\main.cpp
+	<iostream>
+	<fstream>
+	<limits>
+	<stdlib.h>
+	"vec3.h"
+	"ray.h"
+	"hitable.h"
+	"camera.h"
+	"material.h"
+
+1523265341 f:\material\raytracing\raytracing\raytracing\outputimage\vec3.h
+	<math.h>
+	<stdlib.h>
+	<iostream>
+
+1523181784 f:\material\raytracing\raytracing\raytracing\outputimage\ray.h
+	"vec3.h"
+
+1523273684 f:\material\raytracing\raytracing\raytracing\outputimage\hitable.h
+	"ray.h"
+
+1523257068 f:\material\raytracing\raytracing\raytracing\outputimage\camera.h
+	"ray.h"
+
+1523287491 f:\material\raytracing\raytracing\raytracing\outputimage\material.h
+	"hitable.h"
+	"vec3.h"
+
