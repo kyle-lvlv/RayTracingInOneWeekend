@@ -13,6 +13,44 @@
 
 using namespace std;
 
+hitable* random_scene()
+{
+    int n = 500;
+    hitable** g_list = new hitable*[n+1];
+    g_list[0] = new sphere(vec3(0,-1000,0), 1000, new lambertian(vec3(.5,.5,.5)));
+    int i = 1;
+    for(int a = -11; a < 11; a++)
+    {
+        for(int b = -11; b < 11; b++)
+        {
+            float choose_mat = random_in_range(0,1);
+            vec3 center(a + 0.9 * random_in_range(0,1), 0.2, b + 0.9 * random_in_range(0,1));
+            if((center - vec3(4,0.2,0)).length() > .9)
+            {
+                if(choose_mat < 0.8)
+                {
+                    g_list[i++] = new sphere(center, .2,
+                                        new lambertian(vec3(random_in_range(0,1) * random_in_range(0,1), random_in_range(0,1) * random_in_range(0,1), random_in_range(0,1) * random_in_range(0,1))));
+                }
+                else if(choose_mat < 0.8)
+                {
+                    g_list[i++] = new sphere(center, .2,
+                                        new metal( vec3( 0.5 * (1 + random_in_range(0,1)), 0.5 * (1 + random_in_range(0,1)), 0.5 * (1 + random_in_range(0,1)) ), 0.5 * random_in_range(0,1) ));
+                }
+                else
+                {
+                    g_list[i++] = new sphere(center, .2, new dielectric(1.5));
+                }
+            }
+        }
+    }
+    g_list[i++] = new sphere(vec3(0,1,0), 1.0, new dielectric(1.5));
+    g_list[i++] = new sphere(vec3(-4,1,0), 1.0, new lambertian(vec3(.4,.2,.1)));
+    g_list[i++] = new sphere(vec3(4,1,0), 1.0, new metal(vec3(.7,.6,.5),.0));
+
+    return new hitable_list(g_list, i);
+}
+
 vec3 color(const ray& r, hitable* world, int depth)
 {
     hit_record rec;
@@ -36,9 +74,9 @@ vec3 color(const ray& r, hitable* world, int depth)
 
 int main()
 {
-    int nx = 200;
-    int ny = 100;
-    int ns = 20;
+    int nx = 1200;
+    int ny = 800;
+    int ns = 10;
 
     ofstream outfile("out.txt", ios_base::out);
     outfile << "P3\n" << nx << " " << ny << "\n255\n";
@@ -48,11 +86,11 @@ int main()
 //    vec3 horizontal(4.0,0.0,0.0);
 //    vec3 vertical(0.0,2.0,0.0);
 //    vec3 origin(0.0,0.0,0.0);
-    vec3 cam_origin = vec3(3,3,2);
-    vec3 cam_ori = vec3(0,0,-1);
+    vec3 cam_origin = vec3(11,3,2);
+    vec3 cam_ori = vec3(0,0.6,0);
     float focus_dist = (cam_origin - cam_ori).length();
     std::cout << focus_dist << "\n";
-    camera c(cam_origin, cam_ori, vec3(0,1,0), 20, float(nx) / float(ny), 2, focus_dist);
+    camera c(cam_origin, cam_ori, vec3(0,1,0), 20, float(nx) / float(ny), 0, 0.7 * focus_dist);
     //c.set_fov(20);
     hitable *list[5];
     list[0] = new sphere(vec3(0,0,-1), 0.5, new lambertian(vec3(0.1,.2,.5)));
@@ -61,6 +99,7 @@ int main()
     list[3] = new sphere(vec3(-1,0,-1), .5, new dielectric(1.5f));
     list[4] = new sphere(vec3(-1,0,-1), -.45, new dielectric(1.5f));
     hitable* world = new hitable_list(list, 5);
+    world = random_scene();
 
     float u = 0;
     float v = 0;
